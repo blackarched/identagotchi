@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigotchi HUD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    <!-- Network Scanning Window -->
+    <div id="network-window" class="hud-window">
+        <div class="title">Available Networks</div>
+        <button id="scan-btn" onclick="location.href='{{ url_for('scan') }}'">Scan</button>
+        <ul>
+            {% for net in networks %}
+            <li><strong>{{ net.ssid || 'Hidden SSID' }}</strong> ({{ net.bssid }}, ch {{ net.channel }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Attack Management Window -->
+    <div id="attack-window" class="hud-window">
+        <div class="title">Attack Panel</div>
+        <form class="deauth-form" action="{{ url_for('do_deauth') }}" method="post">
+            <input type="text" name="bssid" placeholder="BSSID" required>
+            <input type="text" name="client" placeholder="Client MAC (opt)">
+            <button type="submit">Deauth Attack</button>
+        </form>
+        <form class="brute-form" action="{{ url_for('do_brute') }}" method="post">
+            <input type="text" name="cap_file" placeholder="Capture File" required>
+            <button type="submit">Crack Password</button>
+        </form>
+    </div>
+
+    <!-- Real-Time Data Window -->
+    <div id="realtime-window" class="hud-window">
+        <div class="title">Real-Time Stats</div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash hud-window" style="bottom:5%; right:5%; width:30%;">
+        {% for msg in messages %}
+            <p>{{ msg }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

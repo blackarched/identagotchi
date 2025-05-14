@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Viewing {{ filename }}</h2>
+  <pre>{{ content }}</pre>
+  <a href="{{ url_for('static_files', filename='../output/' ~ filename) }}" download>Download Log</a>
+{% endblock %}

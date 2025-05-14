@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Capture WPA Handshake</h2>
+  <form method="post" action="{{ url_for('scan') }}">
+    {{ form.csrf_token }}
+    <div>
+      {{ form.bssid.label }}<br>
+      {{ form.bssid(size=20) }}
+      {% for err in form.bssid.errors %}
+        <span class="error">{{ err }}</span>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.channel.label }}<br>
+      {{ form.channel() }}
+      {% for err in form.channel.errors %}
+        <span class="error">{{ err }}</span>
+      {% endfor %}
+    </div>
+    <button type="submit">Start Scan</button>
+  </form>
+{% endblock %}

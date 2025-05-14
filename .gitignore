@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# Runtime directories
+/logs/*
+/captures/*
+/results/*
+
+# Environment
+.env
+
+# Static assets build (if any)
+/static/

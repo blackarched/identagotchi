@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Brute-Force Attack</h2>
+  <form method="post" action="{{ url_for('brute') }}">
+    {{ form.csrf_token }}
+    <div>
+      {{ form.capture.label }}<br>
+      {{ form.capture(size=40) }}
+      {% for err in form.capture.errors %}
+        <span class="error">{{ err }}</span>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.bssid.label }}<br>
+      {{ form.bssid(size=20) }}
+      {% for err in form.bssid.errors %}
+        <span class="error">{{ err }}</span>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.wordlist.label }}<br>
+      {{ form.wordlist(size=40) }}
+      {% for err in form.wordlist.errors %}
+        <span class="error">{{ err }}</span>
+      {% endfor %}
+    </div>
+    <button type="submit">Start Brute-Force</button>
+  </form>
+{% endblock %}

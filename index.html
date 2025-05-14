@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minigotchi Control Panel</title>
+  <link rel="stylesheet" href="{{ url_for('static_files', filename='css/style.css') }}">
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for category, msg in messages %}
+      <li class="flash {{ category }}">{{ msg }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+
+  <h1>Welcome to Minigotchi</h1>
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('scan') }}">Scan (Handshake Capture)</a></li>
+      <li><a href="{{ url_for('deauth') }}">Deauth Attack</a></li>
+      <li><a href="{{ url_for('brute') }}">Brute-Force</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
+</body>
+</html>

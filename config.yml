@@ -1,0 +1,30 @@
+# Main Minigotchi configuration
+
+# Network interface to use (must match a physical interface)
+interface: wlan0
+
+# Path to the wordlist for dictionary attacks
+wordlist_path: /usr/share/wordlists/rockyou.txt
+
+# Directory where output (pcaps, logs) will be stored
+output_dir: /var/log/minigotchi
+
+# Timeouts (in seconds)
+scan_timeout: 60
+brute_timeout: 3600
+
+# Deauth attack settings
+deauth_count: 10
+deauth_interval: 0.1
+
+# Preferred cracking tool: one of aircrack-ng, hashcat, john; if omitted, will auto-detect
+# preferred_tool: hashcat
+
+# Web UI settings
+web_port: 8080
+web_user: admin
+# Store only the hash; generate with werkzeug.security.generate_password_hash()
+web_password_hash: pbkdf2:sha256:150000$abcd1234$e5f6…
+
+# Secret key for Flask sessions (override via env MINIGOTCHI_SECRET)
+# secret_key: some-long-random-string
